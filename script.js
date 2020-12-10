@@ -40,6 +40,9 @@ var state_module = (function () {
     };
 })();
 
+/*
+ * Sets the onclick events for the buttons initially loaded on the page
+ */
 function set_buttons(){
     let buttons = document.getElementsByTagName("button");
     /* 
@@ -58,6 +61,9 @@ function set_buttons(){
     );
 }
 
+/*
+ * Adds a new line of grade and weight inputs
+ */
 function add_assignment(){
     let form = document.getElementById("form");
     let fragment = document.createDocumentFragment();
@@ -107,6 +113,14 @@ function add_assignment(){
     state_module.inc_counter();
 }
 
+/*
+ * Removes all elements related to an assignment field
+ *
+ * Args:
+ * assignmnet_num: the assigment number to be removed. This is automatically
+ * filled when the assignment field was created.
+ * 
+ * 
 function del_assignment(assignment_num){
     let grade = document.getElementById(`grade_field_${assignment_num}`);
     grade.remove();
@@ -120,19 +134,19 @@ function del_assignment(assignment_num){
 
 function calculate(){
     let error_msg = document.getElementById("result");
-    if (error_msg != null){
+    if  (error_msg != null){
         error_msg.remove();
     }
 
     let pass_grade = Number(document.getElementById("pass_grade").value);
-    if (!pass_grade){
+    if  (!pass_grade){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: passing grade was left empty";
         document.body.appendChild(error);
         return;
     }    
-    if (isNaN(pass_grade) || pass_grade < 0 || pass_grade > 100){
+    if  (isNaN(pass_grade) || pass_grade < 0 || pass_grade > 100){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: passing grade must be a percent between 0 and 100";
@@ -201,7 +215,7 @@ function calculate(){
         document.body.appendChild(error);
         return;
     }
-    if(total_weight+exam_weight != 100){
+    if (total_weight+exam_weight != 100){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: weights must add up to 100%";
@@ -212,7 +226,7 @@ function calculate(){
     /* Function will calculate average needed for remaining grades plus final
      * if the user has not yet received a grades back for all assignments
      */
-    if(missing_grade_count > 0){
+    if (missing_grade_count > 0){
         let remaining_weight = total_missing_weight + exam_weight;
         let needed_percent = remaining_grade/remaining_weight*100;
         let msg = document.createElement("P");
