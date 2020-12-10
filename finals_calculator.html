@@ -19,18 +19,18 @@
     </p>
     <div id="form">
         <label for="pass_grade">Passing grade:</label>
-        <input type="text" id="pass_grade" name="passing_grade" maxlength="3" size="1">
+        <input type="text" id="pass_grade" name="pass_grade" maxlength="6" size="2">
         <!-- Use span to place '%' next to input field -->
         <p<span>%</span></p>
 
         <div class="grade_field" id="grade_field_0">
             <label for="grade_0">Grade:</label>
-            <input type="text" class="grade_input" id="grade_0" name="grade_0" maxlength="3" size="1">
+            <input type="text" class="grade_input" id="grade_0" name="grade_0" maxlength="6" size="2">
             <p<span>%</span></p>
         </div>
         <div class="weight_field" id="weight_field_0">
             <label for="weight_0">Weight:</label>
-            <input type="text" class="weight_input" id="weight_0" name="weight_0" maxlength="3" size="1">
+            <input type="text" class="weight_input" id="weight_0" name="weight_0" maxlength="6" size="2">
             <p<span>%</span></p>
         </div>
 
@@ -38,8 +38,18 @@
     </div>
 
     <button type="button">Add Assignment</button>
+
+    <div class="clear" id="clear_0">&nbsp;</div>
+
+    <label for="final_weight">Final exam weight:</label>
+    <input type="text" id="final_weight" name="final_weight" maxlength="6" size="2">
+    <p<span>%</span></p>
+
+    <div class="clear" id="clear_0">&nbsp;</div>
+
     <button type="button">Calculate</button>
 
+    <div class="clear" id="clear_0">&nbsp;</div>
 </body>
 
 </html>

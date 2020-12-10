@@ -70,7 +70,7 @@ function add_assignment(){
     div.id = `grade_field_${counter}`
     div.innerHTML = `
         <label for="${id}">Grade:</label>
-        <input type = "text" id = "${id}" name = "${id}" maxlength = "3" size = "1" >
+        <input type = "text" class="grade_input" id = "${id}" name = "${id}" maxlength = "6" size = "2">
         <p<span>%</span></p>
     `;
     fragment.appendChild(div);
@@ -81,7 +81,7 @@ function add_assignment(){
     div.id = `weight_field_${counter}`
     div.innerHTML = `
         <label for="${id}">Weight:</label>
-        <input type="text" class="weight_input" id="${id}" name="${id}" maxlength="3" size="1">
+        <input type="text" class="weight_input" id="${id}" name="${id}" maxlength="6" size="2">
         <p<span>%</span></p>
     `;
     fragment.appendChild(div)
@@ -108,8 +108,6 @@ function add_assignment(){
 }
 
 function del_assignment(assignment_num){
-    console.log("Deleting assignment " + assignment_num);
-
     let grade = document.getElementById(`grade_field_${assignment_num}`);
     grade.remove();
     let weight = document.getElementById(`weight_field_${assignment_num}`);
@@ -121,25 +119,98 @@ function del_assignment(assignment_num){
 }
 
 function calculate(){
-    let pass_grade = document.getElementById("pass_grade").value;
-    let error;
+    let error_msg = document.getElementById("result");
+    if (error_msg != null){
+        error_msg.remove();
+    }
+
+    let pass_grade = Number(document.getElementById("pass_grade").value);
     if (!pass_grade){
-        error = document.createElement("P");
+        let error = document.createElement("P");
+        error.id = "result";
         error.innerText = "Error: passing grade was left empty";
         document.body.appendChild(error);
         return;
     }    
     if (isNaN(pass_grade) || pass_grade < 0 || pass_grade > 100){
-        error = document.createElement("P");
-        error.innerText = "Error: passing grade must be an integer between 0 and 100";
+        let error = document.createElement("P");
+        error.id = "result";
+        error.innerText = "Error: passing grade must be a percent between 0 and 100";
         document.body.appendChild(error);
         return;
     }
-    var i;
-    var grades = document.getElementsByClassName("grade_input");
-    console.log(grades);
-    for(i=0;i<grades.length;i++){
-        console.log(grades[i].value + ", ");
+
+    let total_grade = 0;
+    let total_weight = 0;
+    let weighted_grade;
+    let grades = document.getElementsByClassName("grade_input");
+    let weights = document.getElementsByClassName("weight_input"); 
+    for(let i=0;i<grades.length;i++){
+        let grade = Number(grades[i].value);
+        let weight = Number(weights[i].value);
+        if (!grade) {
+            let error = document.createElement("P");
+            error.id = "result";
+            error.innerText = "Error: a grade was left empty";
+            document.body.appendChild(error);
+            return;
+        }
+        if (isNaN(grade) || grade < 0 || grade > 100) {
+            let error = document.createElement("P");
+            error.id = "result";
+            error.innerText = "Error: grades must be a percent between 0 and 100";
+            document.body.appendChild(error);
+            return;
+        }
+        if (!weight) {
+            let error = document.createElement("P");
+            error.id = "result";
+            error.innerText = "Error: a weight was left empty";
+            document.body.appendChild(error);
+            return;
+        }
+        if (isNaN(weight) || weight < 0 || weight > 100) {
+            let error = document.createElement("P");
+            error.id = "result";
+            error.innerText = "Error: weights must be a percent between 0 and 100";
+            document.body.appendChild(error);
+            return;
+        }
+
+        weighted_grade = grade*weight/100;
+        total_grade += weighted_grade;
+        total_weight += weight;
+        console.log("Total weight is now: " + total_weight);
     }
+
+    let remaining_grade = pass_grade - total_grade;
+    let exam_weight = Number(document.getElementById("final_weight").value);
+    if (!exam_weight) {
+        let error = document.createElement("P");
+        error.id = "result";
+        error.innerText = "Error: final exam weight was left empty";
+        document.body.appendChild(error);
+        return;
+    }
+    if (isNaN(exam_weight) || exam_weight < 0 || exam_weight > 100) {
+        let error = document.createElement("P");
+        error.id = "result";
+        error.innerText = "Error: final exam weight must be a percent between 0 and 100";
+        document.body.appendChild(error);
+        return;
+    }
+    if(Number(total_weight)+exam_weight != 100){
+        let error = document.createElement("P");
+        error.id = "result";
+        error.innerText = "Error: weights must add up to 100%";
+        document.body.appendChild(error);
+        return;
+    }
+
+    let needed_percent = remaining_grade/exam_weight*100;
+    let msg = document.createElement("P");
+    msg.id = "result";
+    msg.innerText = `You will need ${needed_percent}% on the final exam in order to pass this course.`;
+    document.body.appendChild(msg);
 }
 
