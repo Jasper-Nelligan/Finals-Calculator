@@ -143,18 +143,13 @@ function calculate(){
     let total_grade = 0;
     let total_weight = 0;
     let weighted_grade;
+    let missing_grade_count = 0;
+    let total_missing_weight = 0;
     let grades = document.getElementsByClassName("grade_input");
     let weights = document.getElementsByClassName("weight_input"); 
     for(let i=0;i<grades.length;i++){
         let grade = Number(grades[i].value);
         let weight = Number(weights[i].value);
-        if (!grade) {
-            let error = document.createElement("P");
-            error.id = "result";
-            error.innerText = "Error: a grade was left empty";
-            document.body.appendChild(error);
-            return;
-        }
         if (isNaN(grade) || grade < 0 || grade > 100) {
             let error = document.createElement("P");
             error.id = "result";
@@ -175,6 +170,13 @@ function calculate(){
             error.innerText = "Error: weights must be a percent between 0 and 100";
             document.body.appendChild(error);
             return;
+        }
+        /* Function will calculate average needed for remaining grades plus final
+         * if the user has not yet received a grades back for all assignments
+         */
+        if (!grade && grade != 0) {
+            missing_grade_count ++;
+            total_missing_weight += weight;
         }
 
         weighted_grade = grade*weight/100;
@@ -199,7 +201,7 @@ function calculate(){
         document.body.appendChild(error);
         return;
     }
-    if(Number(total_weight)+exam_weight != 100){
+    if(total_weight+exam_weight != 100){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: weights must add up to 100%";
@@ -207,10 +209,69 @@ function calculate(){
         return;
     }
 
+    /* Function will calculate average needed for remaining grades plus final
+     * if the user has not yet received a grades back for all assignments
+     */
+    if(missing_grade_count > 0){
+        let remaining_weight = total_missing_weight + exam_weight;
+        let needed_percent = remaining_grade/remaining_weight*100;
+        let msg = document.createElement("P");
+        msg.id = "result";
+        let response = personal_msg(needed_percent);
+        if(missing_grade_count > 1){
+            msg.innerText = `You will need an average of ${needed_percent.toFixed(1)}% on the `
+                +`remaining ${missing_grade_count} assignments and on the final exam in `
+                +`order to pass this course. ` + response;
+        }
+        else if(missing_grade_count == 1){
+            msg.innerText = `You will need an average of ${needed_percent.toFixed(1)}% `
+                +`both on the remaining assignment and on the final exam in order `
+                +`to pass this course. ` + response; 
+        }
+
+        document.body.appendChild(msg);
+        return;
+    }
+
     let needed_percent = remaining_grade/exam_weight*100;
     let msg = document.createElement("P");
     msg.id = "result";
-    msg.innerText = `You will need ${needed_percent}% on the final exam in order to pass this course.`;
+    let response = personal_msg(needed_percent);
+    msg.innerText = `You will need ${needed_percent.toFixed(1)}% on the final `
+         +`exam in order to pass this course. ` + response;
     document.body.appendChild(msg);
+}
+
+/* 
+ * Returns my personalized message based on what the user needs for their final grade
+ *
+ * Args: 
+ * grade: the grade that is needed on the final to pass
+ * 
+ * Returns: my personal message to use as string
+ */
+function personal_msg(needed_grade){
+    if (needed_grade <= 0){
+        return("Wow. You could literally not go to the final exam and still pass. Not that it's encouraged, "
+            +"but I'm still jealous!");
+    }
+    else if (needed_grade > 0 && needed_grade <= 40){
+        return("Should be pretty easy, no?");
+    }
+    else if (needed_grade > 40 && needed_grade <= 60){
+        return("As long as you put some work in I'm sure you'll be fine.");
+    }
+    else if (needed_grade > 60 && needed_grade <= 80){
+        return("You should probably start studying now instead of calculating what you need on the final to pass lmao.");
+    }
+    else if (needed_grade > 80 && needed_grade <= 90){
+        return("Gonna be tight but I believe in you!");
+    }
+    else if (needed_grade > 90 && needed_grade <=100){
+        return("I'll pray for you.");
+    }
+    else if (needed_grade > 100){
+        return("Damn, I'd hate to be you right now.");
+    }
 }
 
