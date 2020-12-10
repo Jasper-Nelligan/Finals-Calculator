@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Finals Calculator</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="set_buttons()">
+    <h1>Finals Calculator</h1>
+    <p>
+        This tool will calculate what you need on your final exam in order to pass the course. Simply input the passing grade for the course,<br>
+        then each assignments grade and weight in percent, and finally the weight of the final exam. The calculator will then tell you what<br>
+        percent you need to pass! If you haven't gotten marks backs for some assignments, that's okay too. Just input the assignments weight<br>
+        but leave the grade field blank. The calculator will return the average you need on all remaining assignments in order to pass.<br><br>
+    </p>
+    <div id="form">
+        <label for="pass_grade">Passing grade:</label>
+        <input type="text" id="pass_grade" name="passing_grade" maxlength="3" size="1">
+        <!-- Use span to place '%' next to input field -->
+        <p<span>%</span></p>
+
+        <div class="grade_field" id="grade_field_0">
+            <label for="grade_0">Grade:</label>
+            <input type="text" class="grade_input" id="grade_0" name="grade_0" maxlength="3" size="1">
+            <p<span>%</span></p>
+        </div>
+        <div class="weight_field" id="weight_field_0">
+            <label for="weight_0">Weight:</label>
+            <input type="text" class="weight_input" id="weight_0" name="weight_0" maxlength="3" size="1">
+            <p<span>%</span></p>
+        </div>
+
+        <div class="clear" id="clear_0">&nbsp;</div>
+    </div>
+
+    <button type="button">Add Assignment</button>
+    <button type="button">Calculate</button>
+
+</body>
+
+</html>

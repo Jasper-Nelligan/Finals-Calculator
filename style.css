@@ -1,0 +1,23 @@
+/* I've commented each section for learning purposes */
+
+/* Adds space between label and text input box */
+#form label {
+  margin-right: 1em;
+}
+
+/* Used to have input boxes side by side and to space them out */
+.grade_field {
+  margin-right: 1em;
+  float:left;
+}
+
+/* Put input box next to grade and add space between '%' and 'remove' button */
+.weight_field {
+  margin-right: 5em;
+  float:left;
+}
+
+/* Used to create input boxes on a new line */
+.clear{
+  clear:both;
+}
