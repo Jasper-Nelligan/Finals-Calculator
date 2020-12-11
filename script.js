@@ -95,6 +95,7 @@ function add_assignment(){
     let button = document.createElement("button");
     button.type = "button";
     button.id = `remove_${counter}`;
+    button.className = "remove_btn";
     button.addEventListener("click",
         function(){
             del_assignment(counter);
@@ -120,7 +121,7 @@ function add_assignment(){
  * assignmnet_num: the assigment number to be removed. This is automatically
  * filled when the assignment field was created.
  * 
- * 
+ */
 function del_assignment(assignment_num){
     let grade = document.getElementById(`grade_field_${assignment_num}`);
     grade.remove();
