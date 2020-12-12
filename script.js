@@ -65,7 +65,7 @@ function set_buttons(){
  * Adds a new line of grade and weight inputs
  */
 function add_assignment(){
-    let form = document.getElementById("form");
+    let form = document.getElementById("form_inputs");
     let fragment = document.createDocumentFragment();
     let counter = state_module.get_counter();
 
@@ -134,6 +134,8 @@ function del_assignment(assignment_num){
 }
 
 function calculate(){
+    let form = document.getElementById("form");
+
     let error_msg = document.getElementById("result");
     if  (error_msg != null){
         error_msg.remove();
@@ -144,14 +146,14 @@ function calculate(){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: passing grade was left empty";
-        document.body.appendChild(error);
+        form.appendChild(error);
         return;
     }    
     if  (isNaN(pass_grade) || pass_grade < 0 || pass_grade > 100){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: passing grade must be a percent between 0 and 100";
-        document.body.appendChild(error);
+        form.appendChild(error);
         return;
     }
 
@@ -169,21 +171,21 @@ function calculate(){
             let error = document.createElement("P");
             error.id = "result";
             error.innerText = "Error: grades must be a percent between 0 and 100";
-            document.body.appendChild(error);
+            form.appendChild(error);
             return;
         }
         if (!weight) {
             let error = document.createElement("P");
             error.id = "result";
             error.innerText = "Error: a weight was left empty";
-            document.body.appendChild(error);
+            form.appendChild(error);
             return;
         }
         if (isNaN(weight) || weight < 0 || weight > 100) {
             let error = document.createElement("P");
             error.id = "result";
             error.innerText = "Error: weights must be a percent between 0 and 100";
-            document.body.appendChild(error);
+            form.appendChild(error);
             return;
         }
         /* Function will calculate average needed for remaining grades plus final
@@ -206,21 +208,21 @@ function calculate(){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: final exam weight was left empty";
-        document.body.appendChild(error);
+        form.appendChild(error);
         return;
     }
     if (isNaN(exam_weight) || exam_weight < 0 || exam_weight > 100) {
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: final exam weight must be a percent between 0 and 100";
-        document.body.appendChild(error);
+        form.appendChild(error);
         return;
     }
     if (total_weight+exam_weight != 100){
         let error = document.createElement("P");
         error.id = "result";
         error.innerText = "Error: weights must add up to 100%";
-        document.body.appendChild(error);
+        form.appendChild(error);
         return;
     }
 
@@ -254,7 +256,7 @@ function calculate(){
     let response = personal_msg(needed_percent);
     msg.innerText = `You will need ${needed_percent.toFixed(1)}% on the final `
          +`exam in order to pass this course. ` + response;
-    document.body.appendChild(msg);
+    form.appendChild(msg);
 }
 
 /* 

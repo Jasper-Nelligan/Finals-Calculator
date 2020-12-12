@@ -1,7 +1,32 @@
 /* I've commented each section for learning purposes */
 
+
+h1 {
+  color: #5c609c;
+}
+
+/* Box around form. The calc function is used to adjust the box when a new
+ * element is added or deleted.
+ */
+#form {
+  background-color: #deddd9;
+  background-size: contain;
+  border-radius: 1em;
+  width: 30em;
+  height: calc(100%em);
+  padding: 1em 1em;
+}
+
+/* .inputs{
+  background-color:red;
+  border-radius: 1em;
+  width: 30em;
+  height: 3em;
+  border-radius: none;
+} */
+
 /* Adds space between label and text input box */
-#form label {
+#form_inputs label {
   margin-right: 1em;
 }
 
