@@ -191,8 +191,8 @@ function calculate(){
         /* Function will calculate average needed for remaining grades plus final
          * if the user has not yet received a grades back for all assignments
          */
-        if (!grade && grade != 0) {
-            missing_grade_count ++;
+        if (!grade) {
+            missing_grade_count++;
             total_missing_weight += weight;
         }
 
