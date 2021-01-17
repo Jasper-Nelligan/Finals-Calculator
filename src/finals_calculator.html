@@ -3,54 +3,55 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Finals Calculator</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <html lang="en"></html>
+  <title>Finals Calculator</title>
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="set_buttons()">
-    <h1>Finals Calculator</h1>
-    <p>
-        This tool will calculate what you need on your final exam in order to pass the course. Simply input the passing grade for the course,<br>
-        then each assignments grade and weight in percent, and finally the weight of the final exam. The calculator will then tell you what<br>
-        percent you need to pass!<br><br>
-        Haven't got all your marks back? That's okay too. Just input the assignments weight but leave the grade field blank. The calculator<br>
-        will return the average you need on all remaining assignments in order to pass.<br><br>
-    </p>
-    <div id="form">
-        <div id="form_inputs">
-            <label for="pass_grade">Passing grade:</label>
-            <input type="text" id="pass_grade" name="pass_grade" maxlength="6" size="2">
-            <!-- Use span to place '%' next to input field -->
-            <p<span>%</span></p>
-            <div class="inputs">
-                <div class="grade_field" id="grade_field_0">
-                    <label for="grade_0">Grade:</label>
-                    <input type="text" class="grade_input" id="grade_0" name="grade_0" maxlength="6" size="2">
-                    <p<span>%</span></p>
-                </div>
-                <div class="weight_field" id="weight_field_0">
-                    <label for="weight_0">Weight:</label>
-                    <input type="text" class="weight_input" id="weight_0" name="weight_0" maxlength="6" size="2">
-                    <p<span>%</span></p>
-                </div>
-
-                <div class="clear" id="clear_0">&nbsp;</div>
-            </div>
+  <h1>Finals Calculator</h1>
+  <p>
+    This tool will calculate what you need on your final exam in order to pass the course. Simply input the passing grade for the course,<br>
+    then each assignments grade and weight in percent, and finally the weight of the final exam. The calculator will then tell you what<br>
+    percent you need to pass!<br><br>
+    Haven't got all your marks back? That's okay too. Just input the assignments weight but leave the grade field blank. The calculator<br>
+    will return the average you need on all remaining assignments in order to pass.<br><br>
+  </p>
+  <div id="form">
+    <div id="form_inputs">
+      <label for="pass_grade">Passing grade:</label>
+      <input type="text" id="pass_grade" name="pass_grade" maxlength="6" size="2">
+      <!-- Use span to place '%' next to input field -->
+      <p<span>%</span></p>
+      <div class="inputs">
+        <div class="grade_field" id="grade_field_0">
+          <label for="grade_0">Grade:</label>
+          <input type="text" class="grade_input" id="grade_0" name="grade_0" maxlength="6" size="2">
+          <p<span>%</span></p>
+        </div>
+        <div class="weight_field" id="weight_field_0">
+          <label for="weight_0">Weight:</label>
+          <input type="text" class="weight_input" id="weight_0" name="weight_0" maxlength="6" size="2">
+          <p<span>%</span></p>
         </div>
 
-        <button type="button" id="add_btn">Add Assignment</button>
-        <div class="clear" id="clear_0">&nbsp;</div>
-
-        <label for="final_weight">Final exam weight:</label>
-        <input type="text" id="final_weight" name="final_weight" maxlength="6" size="2">
-        <p<span>%</span></p>
-        <div class="clear" id="clear_0">&nbsp;</div>
-
-        <button type="button" id="calc_btn">Calculate</button>
-        <div class="clear" id="clear_0">&nbsp;</div>
+        <div class="clear">&nbsp;</div>
+      </div>
     </div>
+
+    <button type="button" id="add_btn">Add Assignment</button>
+    <div class="clear">&nbsp;</div>
+
+    <label for="final_weight">Final exam weight:</label>
+    <input type="text" id="final_weight" name="final_weight" maxlength="6" size="2">
+    <p<span>%</span></p>
+    <div class="clear">&nbsp;</div>
+
+    <button type="button" id="calc_btn">Calculate</button>
+    <div class="clear">&nbsp;</div>
+  </div>
 </body>
 
 </html>
