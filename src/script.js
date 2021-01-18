@@ -1,6 +1,6 @@
 "use strict";
 
-/* 
+/** 
  * First time learning about state modules so I've commented accordingly.
  *
  * This is what is known as a state module. It allows private variables in
@@ -40,7 +40,7 @@ var state_module = (function () {
     };
 })();
 
-/*
+/**
  * Sets the onclick events for the buttons initially loaded on the page
  */
 function set_buttons(){
@@ -61,8 +61,8 @@ function set_buttons(){
     );
 }
 
-/*
- * Adds a new line of grade and weight inputs
+/**
+ * Adds a new line of grade and weight inputs.
  */
 function add_assignment(){
     let form = document.getElementById("form_inputs");
@@ -114,13 +114,10 @@ function add_assignment(){
     state_module.inc_counter();
 }
 
-/*
+/**
  * Removes all elements related to an assignment field
- *
- * Args:
- * assignmnet_num: the assigment number to be removed. This is automatically
- * filled when the assignment field was created.
- * 
+ * @param {Number} assignment_num assignment number to be removed. This value was automatically
+ *                                assigned to the new assignment field when it was created
  */
 function del_assignment(assignment_num){
     let grade = document.getElementById(`grade_field_${assignment_num}`);
@@ -133,6 +130,10 @@ function del_assignment(assignment_num){
     clear.remove();
 }
 
+/**
+ * Reads in form input data and calculates the needed grade for the final. Displays an
+ * error message if input could not be processed.
+ */
 function calculate(){
     let form = document.getElementById("form");
 
@@ -259,13 +260,12 @@ function calculate(){
     form.appendChild(msg);
 }
 
-/* 
+/** 
  * Returns my personalized message based on what the user needs for their final grade
  *
- * Args: 
- * grade: the grade that is needed on the final to pass
+ * @param {Number} needed_grade the grade that is needed on the final to pass
  * 
- * Returns: my personal message to use as string
+ * @returns: {String}           a personal note about their grade needed
  */
 function personal_msg(needed_grade){
     if (needed_grade <= 0){
