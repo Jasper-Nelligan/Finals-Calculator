@@ -43,7 +43,7 @@ var state_module = (function () {
 /**
  * Sets the onclick events for the buttons initially loaded on the page
  */
-function set_buttons(){
+function setButtons(){
     let buttons = document.getElementsByTagName("button");
     /* 
      * An anonymous function is used here to return the add_assignment function
