@@ -13,17 +13,16 @@
  * instead of state_module.inc_counter.
  * 
  */
-var state_module = (function () {
+var stateModule = (function () {
     // private variable
-    let _counter = 1;
-
+    let _counter = 1C
     // public function since it is returned to the caller
-    function inc_counter(num){
+    function incCounter(num){
         _counter ++;
     }
 
     // public get function
-    function get_counter(){
+    function getCounter(){
         return _counter
     }
 
@@ -35,8 +34,8 @@ var state_module = (function () {
      * inc_counter is an attribute of the returned object.
      */
     return {
-        inc_counter: inc_counter,
-        get_counter: get_counter
+        inc_counter: incCounter,
+        get_counter: getCounter
     };
 })();
 
@@ -51,7 +50,7 @@ function setButtons(){
      */
     buttons[0].addEventListener("click", 
         function(){
-            add_assignment();
+            addAssignment();
         }    
     );
     buttons[1].addEventListener("click", 
@@ -64,10 +63,10 @@ function setButtons(){
 /**
  * Adds a new line of grade and weight inputs.
  */
-function add_assignment(){
+function addAssignment(){
     let form = document.getElementById("form_inputs");
     let fragment = document.createDocumentFragment();
-    let counter = state_module.get_counter();
+    let counter = stateModule.get_counter();
 
     // create a new Id to be assigned to 'for' attribute of label
     let id = `grade_${counter}`;
@@ -98,7 +97,7 @@ function add_assignment(){
     button.className = "remove_btn";
     button.addEventListener("click",
         function(){
-            del_assignment(counter);
+            delAssignment(counter);
         }
     );
     button.innerHTML = "Remove";
@@ -111,7 +110,7 @@ function add_assignment(){
     fragment.appendChild(div)
 
     form.appendChild(fragment);
-    state_module.inc_counter();
+    stateModule.inc_counter();
 }
 
 /**
@@ -119,7 +118,7 @@ function add_assignment(){
  * @param {Number} assignment_num assignment number to be removed. This value was automatically
  *                                assigned to the new assignment field when it was created
  */
-function del_assignment(assignment_num){
+function delAssignment(assignment_num){
     let grade = document.getElementById(`grade_field_${assignment_num}`);
     grade.remove();
     let weight = document.getElementById(`weight_field_${assignment_num}`);
@@ -235,7 +234,7 @@ function calculate(){
         let needed_percent = remaining_grade/remaining_weight*100;
         let msg = document.createElement("P");
         msg.id = "result";
-        let response = personal_msg(needed_percent);
+        let response = personalMsg(needed_percent);
         if(missing_grade_count > 1){
             msg.innerText = `You will need an average of ${needed_percent.toFixed(1)}% on the `
                 +`remaining ${missing_grade_count} assignments and on the final exam in `
@@ -254,7 +253,7 @@ function calculate(){
     let needed_percent = remaining_grade/exam_weight*100;
     let msg = document.createElement("P");
     msg.id = "result";
-    let response = personal_msg(needed_percent);
+    let response = personalMsg(needed_percent);
     msg.innerText = `You will need ${needed_percent.toFixed(1)}% on the final `
          +`exam in order to pass this course. ` + response;
     form.appendChild(msg);
@@ -267,7 +266,7 @@ function calculate(){
  * 
  * @returns: {String}           a personal note about their grade needed
  */
-function personal_msg(needed_grade){
+function personalMsg(needed_grade){
     if (needed_grade <= 0){
         return("Wow. You could literally not go to the final exam and still pass. Not that it's encouraged, "
             +"but I'm still jealous!");
