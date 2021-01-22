@@ -15,7 +15,7 @@
  */
 var stateModule = (function () {
     // private variable
-    let _counter = 1C
+    let _counter = 1;
     // public function since it is returned to the caller
     function incCounter(num){
         _counter ++;
