@@ -166,6 +166,10 @@ function calculate(){
     let grades = document.getElementsByClassName("grade_input");
     let weights = document.getElementsByClassName("weight_input"); 
     for(let i=0;i<grades.length;i++){
+        let missingGrade = false;
+        if (grades[i].value == '') {
+            missingGrade = true;
+        }
         let grade = Number(grades[i].value);
         let weight = Number(weights[i].value);
         if (isNaN(grade) || grade < 0 || grade > 100) {
@@ -192,7 +196,7 @@ function calculate(){
         /* Function will calculate average needed for remaining grades plus final
          * if the user has not yet received a grades back for all assignments
          */
-        if (!grade && grade != 0) {
+        if (missingGrade) {
             missing_grade_count++;
             total_missing_weight += weight;
         }
@@ -200,7 +204,6 @@ function calculate(){
         weighted_grade = grade*weight/100;
         total_grade += weighted_grade;
         total_weight += weight;
-        console.log("Total weight is now: " + total_weight);
     }
 
     let remaining_grade = pass_grade - total_grade;
