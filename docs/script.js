@@ -16,9 +16,10 @@
 var stateModule = (function () {
     // private variable
     let _counter = 1;
+    
     // public function since it is returned to the caller
-    function incCounter(num){
-        _counter ++;
+    function incCounter(){
+        _counter++;
     }
 
     // public get function
@@ -191,7 +192,7 @@ function calculate(){
         /* Function will calculate average needed for remaining grades plus final
          * if the user has not yet received a grades back for all assignments
          */
-        if (!grade) {
+        if (!grade && grade != 0) {
             missing_grade_count++;
             total_missing_weight += weight;
         }
